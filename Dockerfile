@@ -14,11 +14,13 @@ RUN curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://package
 RUN echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 RUN apt update
 RUN apt install -y kubectl
+# Installing helm
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
 RUN apt install apt-transport-https --yes
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 RUN apt update
 RUN apt install -y helm
+
 RUN apt install -y hugo
 RUN apt install -y wget
 RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq
